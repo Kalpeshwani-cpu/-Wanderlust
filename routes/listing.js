@@ -4,6 +4,9 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const Listing = require("../models/listing.js");
 const {isLoggedIn,isOwner,validatelisting} = require("../middleware.js");
 const lisitngController = require("../controllers/listings.js");
+const multer  = require('multer');
+const {storage} = require("../cloudConfig.js");
+const upload = multer({storage});
 
 //this is use for combine the same path function. exp
 //index route
@@ -13,7 +16,11 @@ const lisitngController = require("../controllers/listings.js");
 router
     .route("/")
     .get(wrapAsync(lisitngController.index))
-    .post(isLoggedIn,validatelisting,wrapAsync(lisitngController.createListing));
+    .post(isLoggedIn,
+        upload.single("listing[image]"),
+        validatelisting,
+        wrapAsync(lisitngController.createListing)
+    );
 
 //new form route
 router.get("/new", isLoggedIn ,lisitngController.newForm);
@@ -24,7 +31,12 @@ router
     //show route
     .get(wrapAsync(lisitngController.show))
     //update route
-    .put(isLoggedIn,isOwner,validatelisting, wrapAsync(lisitngController.updateListing))
+    .put(isLoggedIn,
+        isOwner,
+        upload.single("listing[image]"),
+        validatelisting, 
+        wrapAsync(lisitngController.updateListing)
+    )
     //delete route
     .delete(isLoggedIn, isOwner, wrapAsync(lisitngController.distroyListing));
 
