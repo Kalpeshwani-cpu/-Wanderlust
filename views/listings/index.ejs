@@ -1,9 +1,82 @@
 <% layout("/layouts/boilerplate") %>
-<body>
-    <h3>All Listings</h3>
+    <!-- <h3>All Listings</h3> -->
     <!-- <form action="/listings/new" method="GET">
         <button>Create New Listing</button>
     </form> -->
+    <style>
+        #filters{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter{
+            text-align: center;
+            margin-top: 2rem;
+            margin-right: 2rem;
+            opacity: 0.7;
+        }
+        .filter:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+        .filter p{
+            font-size: 0.8rem;
+        }
+        .tax-info{
+            display: none;
+        }
+        .switch{
+            border: 1px solid black;
+            border-radius: 1rem;
+            height: 3rem;
+            padding: 0.5rem;
+            margin-left: 2.5rem;
+            display: flex;
+            align-items: centere;
+        }
+    </style>
+    <div id="filters">
+        <div class="filter">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Room</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-city"></i></div>
+            <p>Iconic Cities</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-brands fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        
+
+        <div class="switch">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After Taxes</label>
+            </div>
+        </div>
+    </div>
     <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
         <% for(let listing of allListings){ %>
             <a href="/listings/<%= listing._id %>" class="listing-link">
@@ -15,12 +88,26 @@
                             <b><%= listing.title %></b>
                             <br>
                             &#8377;<%= listing.price.toLocaleString("en-IN") %>/ night  
+                            <i class="tax-info">&nbsp; &nbsp;+18% GAST</i>
                         </p>
                     </div>
                 </div>
             </a>
         <%}%> 
     </div>
-</body>
 
 
+<script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    let taxInfo = document.getElementsByClassName("tax-info");
+    taxSwitch.addEventListener("click",()=>{
+        
+        for(info of taxInfo){
+            if(info.style.display != "inline"){
+                info.style.display = "inline";
+            }else{
+                info.style.display = "none";
+            }
+        }
+    });
+</script>
