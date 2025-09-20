@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 <script>
     const mapToken = "<%= process.env.MAP_TOKEN %>";
-    const listing = <%- JSON.stringify(listing) %>;
+    const listing = <%- JSON.stringify(listing).replace(/</g, '\\u003c') %>;
 </script>
 <div>
     <div class="row mt-3">
@@ -23,12 +23,12 @@
                     <br>
                     <%= listing.country %>
                     <br>
-                     <% if(listing.category) { %>
-                         <p class="mt-2"><b>Category:</b> <%= listing.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) %></p>
-                     <% } else { %>
-                         <p class="mt-2">Category: Not Specified</p>
-                     <% } %>
-                 </p>
+                    <% if(listing.category) { %>
+                        <p class="mt-2"><b>Category:</b> <%= listing.category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) %></p>
+                    <% } else { %>
+                        <p class="mt-2">Category: Not Specified</p>
+                    <% } %>
+                </p>
             </div>
         </div>
     </div>
