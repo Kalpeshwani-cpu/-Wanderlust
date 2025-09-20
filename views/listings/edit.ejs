@@ -34,6 +34,19 @@
                 <label for="image" class="form-label">Upload New Image</label>
                 <input name="listing[image]" type="file" class="form-control">
             </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select name="listing[category]" class="form-select" required>
+                    <option value="beaches" <%= listing.category === 'beaches' ? 'selected' : '' %>>Beaches</option>
+                    <option value="hill-stations" <%= listing.category === 'hill-stations' ? 'selected' : '' %>>Hill Stations</option>
+                    <option value="historical-places" <%= listing.category === 'historical-places' ? 'selected' : '' %>>Historical Places</option>
+                    <option value="adventure-spots" <%= listing.category === 'adventure-spots' ? 'selected' : '' %>>Adventure Spots</option>
+                    <option value="wildlife-nature" <%= listing.category === 'wildlife-nature' ? 'selected' : '' %>>Wildlife & Nature</option>
+                    <option value="religious-spiritual" <%= listing.category === 'religious-spiritual' ? 'selected' : '' %>>Religious & Spiritual</option>
+                    <option value="modern-cities-urban" <%= listing.category === 'modern-cities-urban' ? 'selected' : '' %>>Modern Cities/Urban</option>
+                    <option value="deserts-unique-landscapes" <%= listing.category === 'deserts-unique-landscapes' ? 'selected' : '' %>>Deserts & Unique Landscapes</option>
+                </select>
+            </div>
             
             <div class="row">
                 <div class="mb-3 col-md-4">

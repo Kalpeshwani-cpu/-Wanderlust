@@ -32,6 +32,22 @@
             >
         </div>
         
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select name="listing[category]" class="form-select" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="beaches">Beaches</option>
+                <option value="hill-stations">Hill Stations</option>
+                <option value="historical-places">Historical Places</option>
+                <option value="adventure-spots">Adventure Spots</option>
+                <option value="wildlife-nature">Wildlife & Nature</option>
+                <option value="religious-spiritual">Religious & Spiritual</option>
+                <option value="modern-cities-urban">Modern Cities/Urban</option>
+                <option value="deserts-unique-landscapes">Deserts & Unique Landscapes</option>
+            </select>
+            <div class="invalid-feedback">Please select a category</div>
+        </div>
+        
         <div class="row">
             <div class="mb-3 col-md-4">
                 <label for="price" class="form-label">Price</label>

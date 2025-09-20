@@ -3,77 +3,51 @@
     <!-- <form action="/listings/new" method="GET">
         <button>Create New Listing</button>
     </form> -->
-    <style>
-        #filters{
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .filter{
-            text-align: center;
-            margin-top: 2rem;
-            margin-right: 2rem;
-            opacity: 0.7;
-        }
-        .filter:hover{
-            opacity: 1;
-            cursor: pointer;
-        }
-        .filter p{
-            font-size: 0.8rem;
-        }
-        .tax-info{
-            display: none;
-        }
-        .switch{
-            border: 1px solid black;
-            border-radius: 1rem;
-            height: 3rem;
-            padding: 0.5rem;
-            margin-left: 2.5rem;
-            display: flex;
-            align-items: centere;
-        }
-    </style>
-    <div id="filters">
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
+    <div class="filters-wrapper">
+        <button class="filters-scroll filters-scroll-left" type="button" aria-label="Scroll left">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div id="filters">
+            <a class="filter listing-link" href="/listings?category=beaches">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beaches</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=hill-stations">
+                <div><i class="fa-solid fa-mountain-sun"></i></div>
+                <p>Hill Stations</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=historical-places">
+                <div><i class="fa-solid fa-landmark"></i></div>
+                <p>Historical Places</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=adventure-spots">
+                <div><i class="fa-solid fa-person-hiking"></i></div>
+                <p>Adventure Spots</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=wildlife-nature">
+                <div><i class="fa-solid fa-tree"></i></div>
+                <p>Wildlife & Nature</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=religious-spiritual">
+                <div><i class="fa-solid fa-hands-praying"></i></div>
+                <p>Religious & Spiritual</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=modern-cities-urban">
+                <div><i class="fa-solid fa-city"></i></div>
+                <p>Modern Cities/Urban</p>
+            </a>
+            <a class="filter listing-link" href="/listings?category=deserts-unique-landscapes">
+                <div><i class="fa-solid fa-sun-plant-wilt"></i></div>
+                <p>Deserts & Unique Landscapes</p>
+            </a>
         </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Room</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-city"></i></div>
-            <p>Iconic Cities</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
-        
-
+        <button class="filters-scroll filters-scroll-right" type="button" aria-label="Scroll right">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
         <div class="switch">
             <div class="form-check-reverse form-switch">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After Taxes</label>
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display Total After GST</label>
             </div>
         </div>
     </div>
@@ -82,32 +56,24 @@
             <a href="/listings/<%= listing._id %>" class="listing-link">
                 <div class="card col listing-card">
                     <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
-                    <div class="card-img-overlay"></div>
+                    <div class="card-img-overlay">
+                        <button class="wishlist-btn" data-listing-id="<%= listing._id %>" aria-label="Add to wishlist">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                    </div>
                     <div class="card-body">
                         <p class="card-text">
                             <b><%= listing.title %></b>
                             <br>
-                            &#8377;<%= listing.price.toLocaleString("en-IN") %>/ night  
-                            <i class="tax-info">&nbsp; &nbsp;+18% GAST</i>
+                            <span class="price-display">
+                                &#8377;<span class="base-price"><%= listing.price.toLocaleString("en-IN") %></span>/ night
+                            </span>
+                            <span class="tax-price" style="display: none;">
+                                &#8377;<span class="total-price"><%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %></span>/ night
+                            </span>
                         </p>
                     </div>
                 </div>
             </a>
         <%}%> 
     </div>
-
-
-<script>
-    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
-    let taxInfo = document.getElementsByClassName("tax-info");
-    taxSwitch.addEventListener("click",()=>{
-        
-        for(info of taxInfo){
-            if(info.style.display != "inline"){
-                info.style.display = "inline";
-            }else{
-                info.style.display = "none";
-            }
-        }
-    });
-</script>

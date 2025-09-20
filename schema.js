@@ -8,6 +8,16 @@ const listingSchema = Joi.object({
         country: Joi.string().required(),
         price: Joi.number().required().min(0),
         image: Joi.string().allow("",null),
+        category: Joi.string().valid(
+            "beaches",
+            "hill-stations",
+            "historical-places",
+            "adventure-spots",
+            "wildlife-nature",
+            "religious-spiritual",
+            "modern-cities-urban",
+            "deserts-unique-landscapes"
+        ).required(),
     }).required()
 });
 

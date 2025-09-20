@@ -15,6 +15,20 @@ const listingSchema = new Schema({
     price: Number,
     location: String,
     country: String,
+    category: {
+        type: String,
+        enum: [
+            "beaches",
+            "hill-stations",
+            "historical-places",
+            "adventure-spots",
+            "wildlife-nature",
+            "religious-spiritual",
+            "modern-cities-urban",
+            "deserts-unique-landscapes"
+        ],
+        required: true
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,

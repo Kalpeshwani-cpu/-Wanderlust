@@ -44,9 +44,9 @@ const sessionOption={
     resave : false,
     saveUninitialized : true,
     cookie:{
-        expires:Date.now() + 7*24*60*60*1000,
-        maxAge: 7*24*60*60*1000,
+        maxAge: 7*24*60*60*1000, // 7 days in milliseconds
         httpOnly:true,
+        secure: false, // Set to true in production with HTTPS
     }
 };
 
@@ -80,6 +80,10 @@ app.use((req,res,next)=>{
 //     let regUser = await User.register(fakeUser,"helloworld");
 //     res.send(regUser);
 // })
+
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 app.use("/listings",listingsRouter);
 app.use("/listings/:id/reviews",reviewsRouter);
